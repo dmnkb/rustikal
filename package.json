@@ -1,0 +1,32 @@
+{
+  "name": "rustikal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:js": "npx esbuild ./src/index.ts --target=esnext --bundle --outdir=./dist --out-extension:.js=.min.js",
+    "dev:js": "npx esbuild ./src/index.ts --target=esnext --bundle --outdir=./dist --out-extension:.js=.min.js --watch",
+    "build:css": "sass ./src/styles/index.scss:dist/styles/index.min.css --style compressed",
+    "dev:css": "sass --watch ./src/styles/index.scss:dist/styles/index.min.css --style compressed",
+    "build:postcss": "postcss dist/styles/index.min.css -u autoprefixer -o dist/styles/index.min.css",
+    "dev:postcss": "postcss dist/styles/index.min.css -u autoprefixer -o dist/styles/index.min.css --watch",
+    "dev:browser-sync": "browser-sync start --server './' --files './'",
+    "build": "run-p \"build:**\"",
+    "dev": "run-p \"dev:**\"",
+    "lint": "eslint"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "browser-sync": "^3.0.2",
+    "esbuild": "^0.20.2",
+    "eslint": "^9.1.0",
+    "eslint-plugin-html": "^8.1.0",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.38",
+    "postcss-cli": "^11.0.0",
+    "sass": "^1.75.0"
+  }
+}
