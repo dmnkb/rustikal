@@ -2,21 +2,20 @@
   display: grid;
 }
 
-@mixin grid-cols-variants {
-  @for $i from 1 through 12 {
-    .grid-cols-#{$i} {
-      grid-template-columns: repeat(#{$i}, minmax(0, 1fr));
-    }
+@for $i from 1 through 12 {
+  .grid-cols-#{$i} {
+    grid-template-columns: repeat(#{$i}, minmax(0, 1fr));
   }
 }
 
-@mixin col-span-variants {
-  @for $i from 1 through 12 {
-    .col-span-#{$i} {
-      grid-column: span $i / span $i;
-    }
+@for $i from 1 through 12 {
+  .col-span-#{$i} {
+    grid-column: span $i / span $i;
   }
 }
 
-@include grid-cols-variants;
-@include col-span-variants;
+@for $i from 1 through 12 {
+  .col-start-#{$i} {
+    grid-column-start: #{$i};
+  }
+}
