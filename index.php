@@ -12,6 +12,7 @@
         <div class="grid grid-cols-3">
           <div class="col-span-1">asd</div>
           <div class="col-span-2">asd</div>
+          <?php echo "asdfgh"; ?>
         </div>
       </div>
     </section>

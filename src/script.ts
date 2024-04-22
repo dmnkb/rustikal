@@ -1,3 +1,3 @@
 export const foo = () => {
-	console.log("bar")
-}
+  console.log('bar');
+};
