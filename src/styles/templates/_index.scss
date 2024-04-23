@@ -1,0 +1,21 @@
+body {
+  background: var(--dark);
+}
+
+.hero {
+  display: flex;
+  align-items: flex-end;
+  height: 100vh;
+  padding-bottom: 3rem;
+  background: var(--dark);
+  h1 {
+    font-size: 4vw;
+    letter-spacing: -0.02em;
+    text-indent: 10%;
+    font-weight: 300;
+    color: var(--light);
+    span {
+      color: var(--accent);
+    }
+  }
+}

@@ -1,11 +1,17 @@
-@import 'reset.scss';
+// Rest
+@import 'reset';
 
-// @import 'utils/margin-and-padding.scss';
-@import 'utils/misc.scss';
-@import 'utils/grid.scss';
-@import 'utils/flex.scss';
+// Utilities
+// @import 'utils/margin-and-padding';
+@import 'utils/misc';
+@import 'utils/grid';
+@import 'utils/flex';
 
-body {
-  background: #333;
-  color: white;
-}
+// Colors
+@import 'colors';
+
+// Typography
+@import 'typography';
+
+// Templates
+@import 'templates/index';
