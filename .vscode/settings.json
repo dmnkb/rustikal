@@ -8,5 +8,5 @@
   "editor.formatOnSave": true,
   "editor.formatOnSaveMode": "file",
   "editor.tabSize": 2,
-  "eslint.validate": ["javascript", "html", "php"]
+  "eslint.validate": ["javascript"]
 }

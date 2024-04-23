@@ -6,16 +6,26 @@
     <link rel="stylesheet" href="dist/styles/index.min.css" />
   </head>
   <body>
-    <h1 class="mb-8">My First Heading</h1>
-    <section>
-      <div class="container">
-        <div class="grid grid-cols-3">
-          <div class="col-span-1">asd</div>
-          <div class="col-span-2">asd</div>
-          <?php echo "asdfgh"; ?>
-        </div>
+    <header class="hero">
+			<div class="container typography">
+				<?php
+				function wrapWordsInSpan($text) {
+					$words = explode(' ', $text);
+					foreach ($words as $word) {
+						$word = trim($word);
+						echo "<span><span>$word</span></span>";
+					}
+				}
+				?>
+				<h1>
+					<?php
+					$text = "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam reiciendis molestias aliquid facere earum magni suscipit consequatur fugit non aspernatur.";
+					wrapWordsInSpan($text);
+					?>
+				</h1>
       </div>
-    </section>
-    <script src="dist/index.min.js"></script>
+    </header>
+          <div class="mask"></div>
+          <script src="dist/index.min.js"></script>
   </body>
 </html>
