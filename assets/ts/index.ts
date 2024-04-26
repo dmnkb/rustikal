@@ -6,27 +6,13 @@ const animate = () => {
   const headlineWords = document.querySelectorAll('h1 > span > span');
 
   gsap.from(headlineWords, {
-    duration: 0.5,
+    duration: 1.25,
     opacity: 0,
-    delay: 0.5,
-    y: 30,
-    ease: 'power2.out',
+    delay: 1.5,
+    y: 60,
+    ease: 'power4.out',
     stagger: {
-      each: 0.01,
-      from: 'start',
-    },
-  });
-
-  const heroSpecs = document.querySelectorAll('.container.specs > div');
-
-  gsap.from(heroSpecs, {
-    duration: 1,
-    opacity: 0,
-    delay: 0.75,
-    y: 30,
-    ease: 'power2.out',
-    stagger: {
-      each: 0.1,
+      each: 0.03,
       from: 'start',
     },
   });

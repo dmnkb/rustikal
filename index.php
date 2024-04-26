@@ -7,12 +7,8 @@
 </head>
 
 <body>
+	<div class="mask"></div>
 	<header class="hero">
-		<div class="container specs">
-			<div><span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum fuga neque maiores repellat nulla minus laborum hic minima, sed nam.</span></div>
-			<div><span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum fuga neque maiores repellat nulla minus laborum hic minima, sed nam.</span></div>
-			<div><span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum fuga neque maiores repellat nulla minus laborum hic minima, sed nam.</span></div>
-		</div>
 		<div class="container typography">
 			<?php
 			function wrapWordsInSpan($text)
@@ -32,7 +28,7 @@
 			</h1>
 		</div>
 	</header>
-	<div class="mask"></div>
+
 	<script src="dist/index.min.js"></script>
 </body>
 
