@@ -3,7 +3,6 @@
 
 // Utilities
 // @import 'utils/margin-and-padding';
-@import 'utils/misc';
 @import 'utils/grid';
 @import 'utils/flex';
 
@@ -15,3 +14,15 @@
 
 // Templates
 @import 'templates/index';
+
+// Additional styles
+
+.container {
+  width: 95%;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+.w-full {
+  width: 100%;
+}
