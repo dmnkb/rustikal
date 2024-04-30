@@ -6,9 +6,9 @@
   "scripts": {
     "build:js": "npx esbuild ./assets/ts/index.ts --target=esnext --bundle --outdir=./dist --out-extension:.js=.min.js --minify",
     "dev:js": "npx esbuild ./assets/ts/index.ts --target=esnext --bundle --outdir=./dist --out-extension:.js=.min.js --watch",
-    "build:css": "sass ./assets/styles/index.scss:dist/styles/index.min.css --style compressed --no-source-map",
+    "build:css": "rm -rf ./dist/* & sass ./assets/styles/index.scss:dist/styles/index.min.css --style compressed --no-source-map",
     "dev:css": "sass --watch ./assets/styles/index.scss:dist/styles/index.min.css --style compressed",
-    "build:postcss": "postcss dist/styles/index.min.css -u autoprefixer -o dist/styles/index.min.css --no-map",
+    "build:postcss": "wait-on dist/styles/index.min.css && postcss dist/styles/index.min.css -u autoprefixer -o dist/styles/index.min.css --no-map",
     "dev:postcss": "postcss dist/styles/index.min.css -u autoprefixer -o dist/styles/index.min.css --watch",
     "dev:browser-sync": "browser-sync start --proxy 'localhost' --files './'",
     "build": "run-p \"build:**\"",
@@ -32,7 +32,8 @@
     "postcss-cli": "^11.0.0",
     "prettier": "^3.2.5",
     "sass": "^1.75.0",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "wait-on": "^7.2.0"
   },
   "dependencies": {
     "gsap": "^3.12.5"
