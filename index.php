@@ -9,7 +9,41 @@
 </head>
 
 <body>
-	<div class="mask"></div>
+	<!-- Animation mask -->
+	<!-- <div class="mask"></div> -->
+
+	<!-- Modal -->
+	<div
+		x-data="{ isOpen: true }" 
+		x-init="$watch('isOpen', isOpen => { isOpen && $dispatch('onMenuOpen') })"
+		>
+		<button 
+			class="menu-button"
+			@click="isOpen = true; $nextTick(() => $refs.modalCloseButton.focus());">
+			Open Modal
+		</button>
+		<div 
+			class="menu"
+			x-show="isOpen"
+			>
+			<button 
+				class="close-button"
+				@click="isOpen = false" 
+				x-ref="modalCloseButton">
+				X
+			</button>
+			<nav>
+				<ul>
+					<li><a href="#">Home</a></li>
+					<li><a href="#">About</a></li>
+					<li><a href="#">Prices</a></li>
+					<li><a href="#">Contact</a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+
+	<!-- Hero -->
 	<header class="hero">
 		<div class="container typography">
 			<?php
@@ -21,6 +55,7 @@
 				}
 			}
 			?>
+			
 			<h1>
 				<?php
 				$text = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam reiciendis molestias aliquid facere earum magni suscipit consequatur fugit non aspernatur.';
