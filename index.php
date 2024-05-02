@@ -14,21 +14,35 @@
 
 	<!-- Modal -->
 	<div
-		x-data="{ isOpen: true }" 
+		x-data="{ isOpen: false }" 
 		x-init="$watch('isOpen', isOpen => { isOpen && $dispatch('onMenuOpen') })"
 		>
 		<button 
 			class="menu-button"
-			@click="isOpen = true; $nextTick(() => $refs.modalCloseButton.focus());">
+			@click="
+				isOpen = true; 
+				$nextTick(() => $refs.modalCloseButton.focus());
+				">
 			Open Modal
 		</button>
 		<div 
+			x-ref="menu"
+			x-cloak
+			:class="[isOpen ? 'should-open' : '']"
 			class="menu"
 			x-show="isOpen"
 			>
 			<button 
 				class="close-button"
-				@click="isOpen = false" 
+				@click="
+					$dispatch('onMenuClose'); 
+					$refs.menu.classList.remove('should-open'); 
+					$refs.menu.classList.add('should-close'); 
+					setTimeout(() => { 
+						isOpen = false; 
+						$refs.menu.classList.remove('should-close'); 
+					}, 500)
+					" 
 				x-ref="modalCloseButton">
 				X
 			</button>
