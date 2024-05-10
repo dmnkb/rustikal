@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', (_event) => {
 
   Alpine.start();
 
-  // animate();
+  animate();
 
   document.addEventListener('onMenuOpen', onMenuOpen);
   document.addEventListener('onMenuClose', onMenuClose);

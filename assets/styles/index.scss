@@ -4,13 +4,11 @@
 // Utilities
 @import 'utils/breakpoints';
 @import 'utils/grid';
-@import 'utils/flex';
 
-// Colors
-@import 'colors';
-
-// Typography
-@import 'typography';
+// Theme
+@import 'theme/colors';
+@import 'theme/typography';
+@import 'theme/animations';
 
 // Modules
 @import 'modules/menu';
@@ -20,8 +18,12 @@
 
 // Additional styles
 
+// https://alpinejs.dev/directives/cloak
+// "Sometimes, when you're using AlpineJS for a part of your template,
+// there is a "blip" where you might see your uninitialized template
+// after the page loads, but before Alpine loads."
 [x-cloak] {
-  display: none;
+  display: none !important;
 }
 
 .container {

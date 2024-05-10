@@ -21,39 +21,60 @@
 			class="menu-button"
 			@click="
 				isOpen = true; 
+				$refs.menu.classList.remove('should-close'); 
 				$nextTick(() => $refs.modalCloseButton.focus());
-				">
-			Open Modal
+				"
+			:class="[isOpen ? 'open' : '']"
+			>
+			<svg width="49" height="49" viewBox="0 0 49 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M8.17432 12.4969H40.1743M8.17432 24.4969H40.1743M8.17432 36.4969H22.1743" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+			</svg>
 		</button>
 		<div 
-			x-ref="menu"
+			class="menu-container"
 			x-cloak
-			:class="[isOpen ? 'should-open' : '']"
-			class="menu"
 			x-show="isOpen"
 			>
-			<button 
-				class="close-button"
+			<div 
+				class="menu" 
+				x-ref="menu" 
+				:class="[isOpen ? 'should-open' : '']"
+				>
+				<button 
+					class="close-button"
+					@click="
+						$dispatch('onMenuClose'); 
+						$refs.menu.classList.remove('should-open'); 
+						$refs.menu.classList.add('should-close'); 
+						setTimeout(() => { 
+							isOpen = false; 
+						}, 500)
+						" 
+					x-ref="modalCloseButton">
+					<svg width="49" height="49" viewBox="0 0 49 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M12.3052 36.6218L36.3052 12.6218M12.3052 12.6218L36.3052 36.6218" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+					</svg>
+				</button>
+				<nav>
+					<ul>
+						<li><a href="#">Home</a></li>
+						<li><a href="#">About</a></li>
+						<li><a href="#">Prices</a></li>
+						<li><a href="#">Contact</a></li>
+					</ul>
+				</nav>
+			</div>
+			<div 
+				class="menu-backdrop"
 				@click="
 					$dispatch('onMenuClose'); 
 					$refs.menu.classList.remove('should-open'); 
 					$refs.menu.classList.add('should-close'); 
 					setTimeout(() => { 
 						isOpen = false; 
-						$refs.menu.classList.remove('should-close'); 
 					}, 500)
 					" 
-				x-ref="modalCloseButton">
-				X
-			</button>
-			<nav>
-				<ul>
-					<li><a href="#">Home</a></li>
-					<li><a href="#">About</a></li>
-					<li><a href="#">Prices</a></li>
-					<li><a href="#">Contact</a></li>
-				</ul>
-			</nav>
+				></div>
 		</div>
 	</div>
 
