@@ -21,10 +21,6 @@ input {
 }
 
 @font-face {
-  font-family: 'Prata';
-  src: url('../../assets/fonts/Prata/Prata-Regular.ttf');
-}
-@font-face {
   font-family: 'WorkSans';
   src: url('../../assets/fonts/Work_Sans/WorkSans-VariableFont_wght.ttf');
 }
@@ -32,17 +28,6 @@ input {
 * {
   font-family: 'WorkSans', serif;
   font-optical-sizing: auto;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: 'Prata', serif;
-  * {
-    font-family: 'Prata', serif;
-  }
 }
 
 a {

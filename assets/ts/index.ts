@@ -4,7 +4,7 @@ import Alpine from 'alpinejs';
 const animate = () => {
   gsap.to('.mask', { height: 0, ease: 'circ.inOut', duration: 1, delay: 0.5 });
 
-  const headlineWords = document.querySelectorAll('h1 > span > span');
+  const headlineWords = document.querySelectorAll('h2 > span > span');
 
   gsap.from(headlineWords, {
     duration: 1.25,
