@@ -10,7 +10,7 @@
     "dev:css": "sass --watch ./assets/styles/index.scss:dist/styles/index.min.css --style compressed",
     "build:postcss": "wait-on dist/styles/index.min.css && postcss dist/styles/index.min.css -u autoprefixer -o dist/styles/index.min.css --no-map",
     "dev:postcss": "postcss dist/styles/index.min.css -u autoprefixer -o dist/styles/index.min.css --watch",
-    "dev:browser-sync": "browser-sync start --proxy 'localhost' --files './'",
+    "dev:browser-sync": "browser-sync start --proxy 'http://localhost:8881/' --files './'",
     "build": "run-p \"build:**\"",
     "dev": "run-p \"dev:**\"",
     "lint": "eslint"

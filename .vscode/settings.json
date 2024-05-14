@@ -10,5 +10,6 @@
   "editor.tabSize": 2,
   "eslint.validate": ["javascript"],
   "phpcs.standard": "codesniffer.ruleset.xml",
-  "phpsab.standard": "codesniffer.ruleset.xml"
+	"phpsab.standard": "codesniffer.ruleset.xml",
+	"editor.defaultFormatter": "valeryanm.vscode-phpsab"
 }

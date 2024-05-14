@@ -2,21 +2,7 @@ import gsap from 'gsap';
 import Alpine from 'alpinejs';
 
 const animate = () => {
-  gsap.to('.mask', { height: 0, ease: 'circ.inOut', duration: 1, delay: 0.5 });
-
-  const headlineWords = document.querySelectorAll('h2 > span > span');
-
-  gsap.from(headlineWords, {
-    duration: 1.25,
-    opacity: 0,
-    delay: 1.5,
-    y: 60,
-    ease: 'power4.out',
-    stagger: {
-      each: 0.03,
-      from: 'start',
-    },
-  });
+  // animation code
 };
 
 const onMenuOpen = () => {
