@@ -28,7 +28,7 @@ $current_page_slug = get_post_field( 'post_name', $current_page_id );
 <body class="<?php echo implode( ' ', get_body_class() ) . ' ' . $current_page_slug; ?>">
 <?php wp_body_open(); ?>
 <div id="page" >
-	<header>
+	<header class="page-header">
 		<div class="container">
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
 			<nav>
@@ -39,6 +39,7 @@ $current_page_slug = get_post_field( 'post_name', $current_page_id );
 						'menu_id'        => 'primary-menu',
 					)
 				);
+				get_template_part( 'template-parts/mobile-menu' );
 				?>
 			</nav>
 		</div>

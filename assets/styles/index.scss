@@ -11,8 +11,9 @@
 @import 'theme/animations';
 
 // Modules
+@import 'modules/header';
 @import 'modules/navigation';
-@import 'modules/menu';
+@import 'modules/mobileMenu';
 
 // Templates
 @import 'templates/index';
@@ -24,15 +25,15 @@
 // there is a "blip" where you might see your uninitialized template
 // after the page loads, but before Alpine loads."
 [x-cloak] {
-  display: none !important;
+	display: none !important;
 }
 
 .container {
-  width: 95%;
-  margin-inline: auto;
-  padding-inline: 1rem;
+	width: 95%;
+	margin-inline: auto;
+	padding-inline: 1rem;
 }
 
 .w-full {
-  width: 100%;
+	width: 100%;
 }
