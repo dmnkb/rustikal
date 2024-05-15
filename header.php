@@ -20,7 +20,12 @@
 	<?php wp_head(); ?>
 </head>
 
-<body <?php body_class(); ?>>
+<?php
+$current_page_id   = get_the_ID();
+$current_page_slug = get_post_field( 'post_name', $current_page_id );
+?>
+
+<body class="<?php echo implode( ' ', get_body_class() ) . ' ' . $current_page_slug; ?>">
 <?php wp_body_open(); ?>
 <div id="page" >
 	<header>
