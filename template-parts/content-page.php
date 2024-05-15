@@ -9,28 +9,26 @@
 
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
-		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-	</header><!-- .entry-header -->
-
-	<?php rustikal_post_thumbnail(); ?>
-
-	<div class="entry-content">
-		<?php
-		the_content();
-
-		wp_link_pages(
-			array(
-				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'rustikal' ),
-				'after'  => '</div>',
-			)
-		);
-		?>
-	</div><!-- .entry-content -->
+<main id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+	<section>
+		<div class="container">
+			<h1>
+				<?php the_title(); ?>
+			</h1>
+			<?php
+			the_content();
+			wp_link_pages(
+				array(
+					'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'rustikal' ),
+					'after'  => '</div>',
+				)
+			);
+			?>
+		</div>
+	</section>
 
 	<?php if ( get_edit_post_link() ) : ?>
-		<footer class="entry-footer">
+		<footer class="container">
 			<?php
 			edit_post_link(
 				sprintf(
@@ -51,4 +49,4 @@
 			?>
 		</footer><!-- .entry-footer -->
 	<?php endif; ?>
-</article><!-- #post-<?php the_ID(); ?> -->
+</main><!-- #post-<?php the_ID(); ?> -->
