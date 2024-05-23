@@ -1,0 +1,32 @@
+header.page-header {
+	.container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		nav {
+			#primary-menu {
+				display: flex;
+				align-items: center;
+				gap: 1rem;
+				ul {
+					list-style-type: none;
+					padding: 0;
+					align-items: center;
+					gap: 1rem;
+
+					display: none;
+					@include media('md') {
+						display: flex;
+					}
+				}
+			}
+		}
+
+		button.menu-button {
+			@include media('md') {
+				display: none;
+			}
+		}
+	}
+}
