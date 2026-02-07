@@ -1,50 +1,50 @@
 import gsap from 'gsap';
-import Alpine from 'alpinejs';
+import '../styles/index.scss';
 
 const animate = () => {
-	// animation code
+  // animation code
 };
 
 const onMenuOpen = () => {
-	const navItems = document.querySelectorAll('.menu nav li');
+  const navItems = document.querySelectorAll('.menu nav li');
 
-	gsap.set(navItems, { opacity: 1, y: 0 });
+  gsap.set(navItems, { opacity: 1, y: 0 });
 
-	gsap.from(navItems, {
-		duration: 1.25,
-		opacity: 0,
-		delay: 0.125,
-		y: 60,
-		ease: 'power4.out',
-		stagger: {
-			each: 0.1,
-			from: 'start',
-		},
-	});
+  gsap.from(navItems, {
+    duration: 1.25,
+    opacity: 0,
+    delay: 0.125,
+    y: 60,
+    ease: 'power4.out',
+    stagger: {
+      each: 0.1,
+      from: 'start',
+    },
+  });
 };
 
 const onMenuClose = () => {
-	const navItems = document.querySelectorAll('.menu nav li');
+  const navItems = document.querySelectorAll('.menu nav li');
 
-	gsap.to(navItems, {
-		duration: 0.5,
-		opacity: 0,
-		y: -100,
-		ease: 'power4.in',
-		stagger: {
-			each: 0.1,
-			from: 'start',
-		},
-	});
+  gsap.to(navItems, {
+    duration: 0.5,
+    opacity: 0,
+    y: -100,
+    ease: 'power4.in',
+    stagger: {
+      each: 0.1,
+      from: 'start',
+    },
+  });
 };
 
 document.addEventListener('DOMContentLoaded', (_event) => {
-	console.log('DOM fully loaded and parsed');
+  console.log('DOM fully loaded and parsed');
 
-	Alpine.start();
+  animate();
 
-	animate();
+  console.log('Test');
 
-	document.addEventListener('onMenuOpen', onMenuOpen);
-	document.addEventListener('onMenuClose', onMenuClose);
+  document.addEventListener('onMenuOpen', onMenuOpen);
+  document.addEventListener('onMenuClose', onMenuClose);
 });

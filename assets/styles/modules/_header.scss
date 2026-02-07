@@ -1,3 +1,5 @@
+@use '../utils/breakpoints' as *;
+
 header.page-header {
 	.container {
 		display: flex;

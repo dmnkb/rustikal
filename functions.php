@@ -79,10 +79,85 @@ function rustikal_scripts()
 {
     wp_enqueue_style('rustikal-style', get_stylesheet_uri(), array(), _S_VERSION);
     wp_style_add_data('rustikal-style', 'rtl', 'replace');
+    $dev_server = rustikal_get_vite_dev_server();
 
-    // Enqueue the main Stylesheet.
-    wp_enqueue_style('main-stylesheet', get_stylesheet_directory_uri() . '/dist/styles/index.min.css', array(), _S_VERSION);
+    if ($dev_server) {
+        wp_enqueue_script('vite-client', $dev_server . '/@vite/client', array(), null, true);
+        wp_enqueue_script('vite-entry', $dev_server . '/assets/ts/index.ts', array(), null, true);
+        return;
+    }
 
-    wp_enqueue_script('main-javascript', get_template_directory_uri() . '/dist/index.min.js', array(), _S_VERSION, true);
+    $manifest = rustikal_get_vite_manifest();
+    $entry = 'assets/ts/index.ts';
+
+    if (! isset($manifest[$entry])) {
+        return;
+    }
+
+    $entry_file = $manifest[$entry]['file'] ?? '';
+    if ($entry_file) {
+        wp_enqueue_script(
+            'main-javascript',
+            get_template_directory_uri() . '/dist/' . $entry_file,
+            array(),
+            _S_VERSION,
+            true
+        );
+    }
+
+    $entry_css = $manifest[$entry]['css'] ?? array();
+    foreach ($entry_css as $index => $css_file) {
+        wp_enqueue_style(
+            'main-stylesheet-' . $index,
+            get_template_directory_uri() . '/dist/' . $css_file,
+            array(),
+            _S_VERSION
+        );
+    }
 }
 add_action('wp_enqueue_scripts', 'rustikal_scripts');
+
+function rustikal_mark_vite_modules($tag, $handle, $src)
+{
+    $module_handles = array('vite-client', 'vite-entry', 'main-javascript');
+    if (in_array($handle, $module_handles, true)) {
+        return '<script type="module" src="' . esc_url($src) . '"></script>';
+    }
+
+    return $tag;
+}
+add_filter('script_loader_tag', 'rustikal_mark_vite_modules', 10, 3);
+
+function rustikal_get_vite_dev_server()
+{
+    $env = getenv('VITE_DEV_SERVER');
+    if ($env) {
+        return rtrim($env, '/');
+    }
+
+    $path = get_template_directory() . '/.vite/dev-server';
+    if (file_exists($path)) {
+        $url = trim((string) file_get_contents($path));
+        if ($url !== '') {
+            return rtrim($url, '/');
+        }
+    }
+
+    return '';
+}
+
+function rustikal_get_vite_manifest()
+{
+    $path = get_template_directory() . '/dist/manifest.json';
+    if (! file_exists($path)) {
+        return array();
+    }
+
+    $contents = file_get_contents($path);
+    $manifest = json_decode((string) $contents, true);
+    if (! is_array($manifest)) {
+        return array();
+    }
+
+    return $manifest;
+}
