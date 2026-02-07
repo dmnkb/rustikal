@@ -18,40 +18,44 @@ get_header();
 	<main id="primary" class="site-main">
 
 		<?php
-		if ( have_posts() ) :
+        if (have_posts()) :
 
-			if ( is_home() && ! is_front_page() ) :
-				?>
-				<header>
-					<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
-				</header>
+            /* Start the Loop */
+            while (have_posts()) :
+                the_post();
+                ?>
+				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+					<div class="container">
+						<?php
+                        the_title(
+                            sprintf('<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url(get_permalink())),
+                            '</a></h2>'
+                        );
+                ?>
+					</div>
+					<div class="container">
+						<?php the_excerpt(); ?>
+					</div>
+				</article>
 				<?php
-			endif;
 
-			/* Start the Loop */
-			while ( have_posts() ) :
-				the_post();
+            endwhile;
 
-				/*
-				 * Include the Post-Type-specific template for the content.
-				 * If you want to override this in a child theme, then include a file
-				 * called content-___.php (where ___ is the Post Type name) and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', get_post_type() );
+            the_posts_navigation();
+        else :
+            ?>
+			<section class="no-results not-found">
+				<div class="container">
+					<h1><?php esc_html_e('Nothing Found', 'rustikal'); ?></h1>
+					<?php get_search_form(); ?>
+				</div>
+			</section>
+			<?php
 
-			endwhile;
-
-			the_posts_navigation();
-
-		else :
-
-			get_template_part( 'template-parts/content', 'none' );
-
-		endif;
-		?>
+        endif;
+?>
 
 	</main><!-- #main -->
 
 <?php
-get_sidebar();
 get_footer();

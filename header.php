@@ -13,7 +13,7 @@
 <!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
-	<meta charset="<?php bloginfo( 'charset' ); ?>">
+	<meta charset="<?php bloginfo('charset'); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 
@@ -22,25 +22,24 @@
 
 <?php
 $current_page_id   = get_the_ID();
-$current_page_slug = get_post_field( 'post_name', $current_page_id );
+$current_page_slug = get_post_field('post_name', $current_page_id);
 ?>
 
-<body class="<?php echo implode( ' ', get_body_class() ) . ' ' . $current_page_slug; ?>">
+<body class="<?php echo implode(' ', get_body_class()) . ' ' . $current_page_slug; ?>">
 <?php wp_body_open(); ?>
 <div id="page" >
 	<header class="page-header">
 		<div class="container">
-			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
+			<a href="<?php echo esc_url(home_url('/')); ?>" rel="home"><?php bloginfo('name'); ?></a>
 			<nav>
 				<?php
-				wp_nav_menu(
-					array(
-						'theme_location' => 'menu-1',
-						'menu_id'        => 'primary-menu',
-					)
-				);
-				get_template_part( 'template-parts/mobile-menu' );
-				?>
+                wp_nav_menu(
+                    array(
+                        'theme_location' => 'menu-1',
+                        'menu_id'        => 'primary-menu',
+                    )
+                );
+?>
 			</nav>
 		</div>
 	</header>

@@ -1,14 +1,18 @@
 {
-	"editor.codeActionsOnSave": {
-		"source.fixAll": "explicit",
-		"source.fixAll.eslint": "explicit"
-	},
-	"editor.formatOnPaste": false,
-	"editor.formatOnType": false,
-	"editor.formatOnSave": true,
-	"editor.formatOnSaveMode": "file",
-	"eslint.validate": ["javascript"],
-	"phpcs.standard": "codesniffer.ruleset.xml",
-	"phpsab.standard": "codesniffer.ruleset.xml",
-	"editor.defaultFormatter": "valeryanm.vscode-phpsab"
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.fixAll.eslint": "explicit"
+  },
+  "editor.formatOnPaste": false,
+  "editor.formatOnType": false,
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "eslint.validate": ["javascript"],
+  "phpcs.standard": "codesniffer.ruleset.xml",
+  "phpcs.executablePath": "${workspaceFolder}/vendor/bin/phpcs",
+  "php-cs-fixer.executablePath": "${workspaceFolder}/vendor/bin/php-cs-fixer",
+  "php-cs-fixer.config": ".php-cs-fixer.php",
+  "[php]": {
+    "editor.defaultFormatter": "junstyle.php-cs-fixer"
+  }
 }

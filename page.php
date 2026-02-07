@@ -16,19 +16,29 @@ get_header();
 ?>
 
 	<?php
-	while ( have_posts() ) :
-		the_post();
+    while (have_posts()) :
+        the_post();
+        ?>
+		<main id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+			<section>
+				<div class="container">
+					<h1><?php the_title(); ?></h1>
+					<?php
+                    the_content();
+        wp_link_pages(
+            array(
+                'before' => '<div class="page-links">' . esc_html__('Pages:', 'rustikal'),
+                'after'  => '</div>',
+            )
+        );
+        ?>
+				</div>
+			</section>
+		</main>
+		<?php
 
-		get_template_part( 'template-parts/content', 'page' );
-
-		// If comments are open or we have at least one comment, load up the comment template.
-		if ( comments_open() || get_comments_number() ) :
-			comments_template();
-		endif;
-
-	endwhile; // End of the loop.
-	?>
+    endwhile; // End of the loop.
+?>
 
 <?php
-get_sidebar();
 get_footer();
