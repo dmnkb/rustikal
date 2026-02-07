@@ -6,7 +6,7 @@ export default defineConfig(({ command }) => ({
   build: {
     outDir: 'dist',
     emptyOutDir: true,
-    manifest: true,
+    manifest: 'manifest.json',
     rollupOptions: {
       input: {
         main: path.resolve(__dirname, 'assets/ts/index.ts'),

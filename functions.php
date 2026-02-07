@@ -81,7 +81,7 @@ function rustikal_scripts()
     wp_style_add_data('rustikal-style', 'rtl', 'replace');
     $dev_server = rustikal_get_vite_dev_server();
 
-    if ($dev_server) {
+    if ($dev_server && rustikal_vite_dev_server_is_up($dev_server)) {
         wp_enqueue_script('vite-client', $dev_server . '/@vite/client', array(), null, true);
         wp_enqueue_script('vite-entry', $dev_server . '/assets/ts/index.ts', array(), null, true);
         return;
@@ -91,6 +91,34 @@ function rustikal_scripts()
     $entry = 'assets/ts/index.ts';
 
     if (! isset($manifest[$entry])) {
+        $fallback_dir = get_template_directory() . '/dist/assets';
+        if (! is_dir($fallback_dir)) {
+            return;
+        }
+
+        $fallback_css = glob($fallback_dir . '/*.css');
+        if (! empty($fallback_css)) {
+            $css_file = basename($fallback_css[0]);
+            wp_enqueue_style(
+                'main-stylesheet-fallback',
+                get_template_directory_uri() . '/dist/assets/' . $css_file,
+                array(),
+                _S_VERSION
+            );
+        }
+
+        $fallback_js = glob($fallback_dir . '/*.js');
+        if (! empty($fallback_js)) {
+            $js_file = basename($fallback_js[0]);
+            wp_enqueue_script(
+                'main-javascript',
+                get_template_directory_uri() . '/dist/assets/' . $js_file,
+                array(),
+                _S_VERSION,
+                true
+            );
+        }
+
         return;
     }
 
@@ -130,11 +158,6 @@ add_filter('script_loader_tag', 'rustikal_mark_vite_modules', 10, 3);
 
 function rustikal_get_vite_dev_server()
 {
-    $env = getenv('VITE_DEV_SERVER');
-    if ($env) {
-        return rtrim($env, '/');
-    }
-
     $path = get_template_directory() . '/.vite/dev-server';
     if (file_exists($path)) {
         $url = trim((string) file_get_contents($path));
@@ -143,21 +166,52 @@ function rustikal_get_vite_dev_server()
         }
     }
 
-    return '';
+    $env = getenv('VITE_DEV_SERVER');
+    if (! $env) {
+        return '';
+    }
+
+    return rtrim($env, '/');
 }
 
 function rustikal_get_vite_manifest()
 {
-    $path = get_template_directory() . '/dist/manifest.json';
-    if (! file_exists($path)) {
-        return array();
+    $paths = array(
+        get_template_directory() . '/dist/manifest.json',
+        get_template_directory() . '/dist/.vite/manifest.json',
+    );
+
+    foreach ($paths as $path) {
+        if (! file_exists($path)) {
+            continue;
+        }
+
+        $contents = file_get_contents($path);
+        $manifest = json_decode((string) $contents, true);
+        if (is_array($manifest)) {
+            return $manifest;
+        }
     }
 
-    $contents = file_get_contents($path);
-    $manifest = json_decode((string) $contents, true);
-    if (! is_array($manifest)) {
-        return array();
+    return array();
+}
+
+function rustikal_vite_dev_server_is_up($url)
+{
+    $parts = wp_parse_url($url);
+    if (! $parts || empty($parts['host'])) {
+        return false;
     }
 
-    return $manifest;
+    $host = $parts['host'];
+    $port = isset($parts['port']) ? (int) $parts['port'] : 80;
+    $timeout = 0.2;
+
+    $connection = @fsockopen($host, $port, $errno, $errstr, $timeout);
+    if (! $connection) {
+        return false;
+    }
+
+    fclose($connection);
+    return true;
 }

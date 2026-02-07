@@ -4,8 +4,8 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"dev": "vite",
-		"build": "vite build",
+		"dev": "sh -c \"mkdir -p .vite && echo http://localhost:5173 > .vite/dev-server && vite\"",
+		"build": "sh -c \"rm -f .vite/dev-server && vite build\"",
 		"preview": "vite preview",
 		"lint": "eslint"
 	},
