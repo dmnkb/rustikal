@@ -148,6 +148,9 @@ class Rustikal_Primary_Nav_Walker extends Walker_Nav_Menu
     private const LINK_CLASS = 'inline-block text-[0.85rem] uppercase tracking-[0.1em] text-current no-underline opacity-70 transition-opacity duration-150 hover:opacity-100 focus:opacity-100';
     private const ACTIVE_LINK_CLASS = 'opacity-100';
     private const SUBMENU_CLASS = 'm-0 list-none p-0';
+    private const FADE_DELAY_START = 140;
+    private const FADE_DELAY_STEP = 90;
+    private int $fade_index = 0;
 
     public function start_el(&$output, $item, $depth = 0, $args = null, $id = 0)
     {
@@ -161,10 +164,15 @@ class Rustikal_Primary_Nav_Walker extends Walker_Nav_Menu
         $class_names = implode(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args, $depth));
         $output .= $indent . '<li class="' . esc_attr($class_names) . '">';
 
+        $delay = self::FADE_DELAY_START + (self::FADE_DELAY_STEP * $this->fade_index);
+        $this->fade_index += 1;
+
         $atts = [
             'href' => ! empty($item->url) ? $item->url : '',
             'class' => self::LINK_CLASS . ($is_active ? ' ' . self::ACTIVE_LINK_CLASS : ''),
             'aria-current' => $is_active ? 'page' : '',
+            'data-fade-in' => 'true',
+            'data-fade-delay' => (string) $delay,
         ];
         $atts = apply_filters('nav_menu_link_attributes', $atts, $item, $args, $depth);
 

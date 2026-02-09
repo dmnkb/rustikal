@@ -28,7 +28,6 @@ const onInit = () => {
       if (token === '') return;
 
       if (token.indexOf('\n') !== -1) {
-        const normalized = token.split('\n').join(' ');
         const parts = token.split('\n');
         parts.forEach((part, partIndex) => {
           if (part !== '') {
@@ -82,6 +81,43 @@ const onInit = () => {
   });
 };
 
+const setupFadeIn = () => {
+  const elements = document.querySelectorAll<HTMLElement>('[data-fade-in]');
+  if (!elements.length) return;
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  elements.forEach((el) => {
+    const delay = Number(el.dataset.fadeDelay ?? '0');
+    const duration = Number(el.dataset.fadeDuration ?? '520');
+
+    el.style.display = 'inline-block';
+    el.style.willChange = 'transform, opacity, clip-path';
+    el.style.clipPath = 'inset(0 0 100% 0)';
+
+    if (prefersReduced) {
+      el.style.transform = 'translateY(0)';
+      el.style.opacity = '1';
+      el.style.clipPath = 'inset(0 0 0 0)';
+      return;
+    }
+
+    el.animate(
+      [
+        { opacity: 0, transform: 'translateY(110%)', clipPath: 'inset(0 0 100% 0)' },
+        { opacity: 1, transform: 'translateY(0)', clipPath: 'inset(0 0 0 0)' },
+      ],
+      {
+        duration,
+        delay,
+        easing: 'cubic-bezier(0.2, 0.65, 0.2, 1)',
+        fill: 'both',
+      },
+    );
+  });
+};
+
 document.addEventListener('DOMContentLoaded', (_event) => {
   onInit();
+  setupFadeIn();
 });
