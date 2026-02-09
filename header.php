@@ -23,9 +23,9 @@ $current_page_slug = get_post_field('post_name', $current_page_id);
 <body class="<?php echo implode(' ', get_body_class()) . ' ' . $current_page_slug; ?>">
 <?php wp_body_open(); ?>
 <div id="page" >
-		<header class="page-header border-b border-neutral-200">
-			<div class="container mx-auto flex items-center justify-between gap-6 py-4">
-				<a href="<?php echo esc_url(home_url('/')); ?>" class="text-base uppercase tracking-[0.06em] text-current no-underline" rel="home"><?php bloginfo('name'); ?></a>
+		<header class="absolute top-0 left-0 w-full z-10">
+			<div class="container mx-auto flex items-center justify-between gap-6 py-6">
+				<a href="<?php echo esc_url(home_url('/')); ?>" class="text-lg uppercase tracking-[0.2em] text-slate-200 no-underline transition hover:text-white" rel="home"><?php bloginfo('name'); ?></a>
 			<nav class="primary-nav">
 				<?php
                 wp_nav_menu(
@@ -34,7 +34,7 @@ $current_page_slug = get_post_field('post_name', $current_page_id);
                         'menu_id'        => 'primary-menu',
                         'menu_class'     => 'primary-menu',
                         'container'      => false,
-                        'items_wrap'     => '<ul id="%1$s" class="%2$s m-0 flex list-none gap-5 p-0">%3$s</ul>',
+                        'items_wrap'     => '<ul id="%1$s" class="%2$s m-0 flex list-none gap-6 p-0 text-sm uppercase tracking-[0.2em] text-slate-200">%3$s</ul>',
                         'walker'         => new Rustikal_Primary_Nav_Walker(),
                     )
                 );

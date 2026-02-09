@@ -17,19 +17,13 @@ get_header();
 					<h1 class="text-2xl mb-3"><?php the_title(); ?></h1>
 					<?php
                     the_content();
-        wp_link_pages(
-            array(
-                'before' => '<div class="page-links">' . esc_html__('Pages:', 'rustikal'),
-                'after'  => '</div>',
-            )
-        );
         ?>
 				</div>
 			</section>
 		</main>
 		<?php
 
-    endwhile; // End of the loop.
+    endwhile;
 ?>
 
 <?php
