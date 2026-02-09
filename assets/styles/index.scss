@@ -13,6 +13,29 @@
 	body {
 		font-family: 'WorkSans', serif;
 	}
+
+	body.page-transition {
+		overflow-x: hidden;
+	}
+
+	#page-transition {
+		position: fixed;
+		inset: 0;
+		z-index: 50;
+		background: #0c1222;
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 600ms ease;
+	}
+
+	body.page-enter #page-transition {
+		opacity: 0;
+	}
+
+	body.page-exit #page-transition {
+		opacity: 1;
+		pointer-events: auto;
+	}
 }
 
 @layer components {

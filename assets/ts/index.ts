@@ -152,8 +152,53 @@ const setupFadeIn = () => {
   });
 };
 
+// MARK: Page Transition
+const setupPageTransition = () => {
+  let overlay = document.getElementById('page-transition');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'page-transition';
+    document.body.appendChild(overlay);
+  }
+  overlay.style.opacity = '1';
+  document.body.classList.add('page-transition');
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return;
+
+  requestAnimationFrame(() => {
+    document.body.classList.remove('page-exit');
+    overlay.style.opacity = '0';
+  });
+
+  const handleLinkClick = (event: MouseEvent) => {
+    const target = event.target as Element | null;
+    const link = target?.closest('a') as HTMLAnchorElement | null;
+    if (!link) return;
+    if (link.target && link.target !== '_self') return;
+    if (link.hasAttribute('download')) return;
+    const href = link.getAttribute('href');
+    if (!href || href.indexOf('#') === 0) return;
+    const url = new URL(link.href, window.location.href);
+    if (url.origin !== window.location.origin) return;
+
+    event.preventDefault();
+    document.body.classList.add('page-exit');
+    overlay.style.opacity = '1';
+    window.setTimeout(() => {
+      window.location.href = link.href;
+    }, 520);
+  };
+
+  document.addEventListener('click', handleLinkClick);
+  window.addEventListener('pageshow', () => {
+    document.body.classList.remove('page-exit');
+  });
+};
+
 // MARK: Boot
 document.addEventListener('DOMContentLoaded', (_event) => {
+  setupPageTransition();
   setupStagger();
   setupFadeIn();
 });

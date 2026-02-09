@@ -20,8 +20,9 @@ $current_page_id   = get_the_ID();
 $current_page_slug = get_post_field('post_name', $current_page_id);
 ?>
 
-<body class="<?php echo implode(' ', get_body_class()) . ' ' . $current_page_slug; ?>">
+<body class="<?php echo implode(' ', get_body_class()) . ' ' . $current_page_slug . ' page-transition page-exit'; ?>">
 <?php wp_body_open(); ?>
+<div id="page-transition"></div>
 <div id="page" >
 		<header class="absolute top-0 left-0 w-full z-10">
 			<div class="container mx-auto flex items-center justify-between gap-6 py-6">
