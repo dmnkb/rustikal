@@ -21,8 +21,8 @@ get_header();
         ?>
 		<main id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 			<section>
-				<div class="container">
-					<h1><?php the_title(); ?></h1>
+				<div class="container mx-auto">
+					<h1 class="text-2xl mb-3"><?php the_title(); ?></h1>
 					<?php
                     the_content();
         wp_link_pages(

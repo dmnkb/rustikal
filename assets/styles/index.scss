@@ -1,39 +1,26 @@
-// Reset
-@use 'reset';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-// Utilities
-@use 'utils/breakpoints';
-@use 'utils/grid';
+@layer base {
+	@font-face {
+		font-family: 'WorkSans';
+		src: url('/wp-content/themes/rustikal/assets/fonts/work-sans/WorkSans-VariableFont_wght.ttf')
+			format('truetype');
+		font-display: swap;
+	}
 
-// Theme
-@use 'theme/colors';
-@use 'theme/typography';
-@use 'theme/animations';
-
-// Modules
-@use 'modules/header';
-@use 'modules/navigation';
-@use 'modules/mobileMenu';
-
-// Templates
-@use 'templates/index';
-
-// Additional styles
-
-// https://alpinejs.dev/directives/cloak
-// "Sometimes, when you're using AlpineJS for a part of your template,
-// there is a "blip" where you might see your uninitialized template
-// after the page loads, but before Alpine loads."
-[x-cloak] {
-  display: none !important;
+	body {
+		font-family: 'WorkSans', serif;
+	}
 }
 
-.container {
-  width: 95%;
-  margin-inline: auto;
-  padding-inline: 1rem;
-}
-
-.w-full {
-  width: 100%;
+@layer components {
+	// https://alpinejs.dev/directives/cloak
+	// "Sometimes, when you're using AlpineJS for a part of your template,
+	// there is a "blip" where you might see your uninitialized template
+	// after the page loads, but before Alpine loads."
+	[x-cloak] {
+		display: none !important;
+	}
 }

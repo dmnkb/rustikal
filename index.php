@@ -25,7 +25,7 @@ get_header();
                 the_post();
                 ?>
 				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-					<div class="container">
+					<div class="container mx-auto">
 						<?php
                         the_title(
                             sprintf('<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url(get_permalink())),
@@ -33,7 +33,7 @@ get_header();
                         );
                 ?>
 					</div>
-					<div class="container">
+					<div class="container mx-auto">
 						<?php the_excerpt(); ?>
 					</div>
 				</article>
@@ -45,7 +45,7 @@ get_header();
         else :
             ?>
 			<section class="no-results not-found">
-				<div class="container">
+				<div class="container mx-auto">
 					<h1><?php esc_html_e('Nothing Found', 'rustikal'); ?></h1>
 					<?php get_search_form(); ?>
 				</div>

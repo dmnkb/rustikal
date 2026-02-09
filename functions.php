@@ -145,6 +145,73 @@ function rustikal_scripts()
 }
 add_action('wp_enqueue_scripts', 'rustikal_scripts');
 
+class Rustikal_Primary_Nav_Walker extends Walker_Nav_Menu
+{
+    private const ITEM_CLASS = 'menu-item';
+    private const LINK_CLASS = 'inline-block text-[0.85rem] uppercase tracking-[0.1em] text-current no-underline opacity-70 transition-opacity duration-150 hover:opacity-100 focus:opacity-100';
+    private const ACTIVE_LINK_CLASS = 'opacity-100';
+    private const SUBMENU_CLASS = 'm-0 list-none p-0';
+
+    public function start_el(&$output, $item, $depth = 0, $args = null, $id = 0)
+    {
+        $indent = $depth ? str_repeat("\t", $depth) : '';
+        $classes = empty($item->classes) ? [] : (array) $item->classes;
+        $is_active = in_array('current-menu-item', $classes, true)
+            || in_array('current-menu-ancestor', $classes, true)
+            || in_array('current-menu-parent', $classes, true);
+
+        $classes[] = self::ITEM_CLASS;
+        $class_names = implode(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args, $depth));
+        $output .= $indent . '<li class="' . esc_attr($class_names) . '">';
+
+        $atts = [
+            'href' => ! empty($item->url) ? $item->url : '',
+            'class' => self::LINK_CLASS . ($is_active ? ' ' . self::ACTIVE_LINK_CLASS : ''),
+            'aria-current' => $is_active ? 'page' : '',
+        ];
+        $atts = apply_filters('nav_menu_link_attributes', $atts, $item, $args, $depth);
+
+        $attributes = '';
+        foreach ($atts as $attr => $value) {
+            if ($value !== null && $value !== '') {
+                $value = ('href' === $attr) ? esc_url($value) : esc_attr($value);
+                $attributes .= ' ' . $attr . '="' . $value . '"';
+            }
+        }
+
+        $title = apply_filters('nav_menu_item_title', $item->title, $item, $args, $depth);
+        if ($title === '' || $title === null) {
+            $title = $item->title;
+        }
+
+        $item_output = ($args->before ?? '');
+        $item_output .= '<a' . $attributes . '>';
+        $item_output .= ($args->link_before ?? '') . esc_html($title) . ($args->link_after ?? '');
+        $item_output .= '</a>';
+        $item_output .= ($args->after ?? '');
+
+        $output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);
+    }
+
+    public function start_lvl(&$output, $depth = 0, $args = null)
+    {
+        $indent = str_repeat("\t", $depth);
+        $classes = apply_filters('nav_menu_submenu_css_class', ['sub-menu', self::SUBMENU_CLASS], $args, $depth);
+        $output .= "\n{$indent}<ul class=\"" . esc_attr(implode(' ', $classes)) . "\">\n";
+    }
+
+    public function end_lvl(&$output, $depth = 0, $args = null)
+    {
+        $indent = str_repeat("\t", $depth);
+        $output .= "{$indent}</ul>\n";
+    }
+
+    public function end_el(&$output, $item, $depth = 0, $args = null)
+    {
+        $output .= "</li>\n";
+    }
+}
+
 function rustikal_mark_vite_modules($tag, $handle, $src)
 {
     $module_handles = array('vite-client', 'vite-entry', 'main-javascript');

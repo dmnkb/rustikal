@@ -28,15 +28,19 @@ $current_page_slug = get_post_field('post_name', $current_page_id);
 <body class="<?php echo implode(' ', get_body_class()) . ' ' . $current_page_slug; ?>">
 <?php wp_body_open(); ?>
 <div id="page" >
-	<header class="page-header">
-		<div class="container">
-			<a href="<?php echo esc_url(home_url('/')); ?>" rel="home"><?php bloginfo('name'); ?></a>
-			<nav>
+		<header class="page-header border-b border-neutral-200">
+			<div class="container mx-auto flex items-center justify-between gap-6 py-4">
+				<a href="<?php echo esc_url(home_url('/')); ?>" class="text-base uppercase tracking-[0.06em] text-current no-underline" rel="home"><?php bloginfo('name'); ?></a>
+			<nav class="primary-nav">
 				<?php
                 wp_nav_menu(
                     array(
                         'theme_location' => 'menu-1',
                         'menu_id'        => 'primary-menu',
+                        'menu_class'     => 'primary-menu',
+                        'container'      => false,
+                        'items_wrap'     => '<ul id="%1$s" class="%2$s m-0 flex list-none gap-5 p-0">%3$s</ul>',
+                        'walker'         => new Rustikal_Primary_Nav_Walker(),
                     )
                 );
 ?>

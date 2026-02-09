@@ -24,10 +24,10 @@ get_header();
 			</header><!-- .page-header -->
 
 			<?php
-            /* Start the Loop */
-            while (have_posts()) :
-                the_post();
-                ?>
+		    /* Start the Loop */
+		    while (have_posts()) :
+		        the_post();
+		        ?>
 				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 					<header class="entry-header">
 						<?php the_title(sprintf('<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url(get_permalink())), '</a></h2>'); ?>
@@ -39,13 +39,13 @@ get_header();
 				</article>
 				<?php
 
-            endwhile;
+		    endwhile;
 
 		    the_posts_navigation();
 		else :
 		    ?>
 			<section class="no-results not-found">
-				<div class="container">
+				<div class="container mx-auto">
 					<p><?php esc_html_e('Sorry, no results matched your search.', 'rustikal'); ?></p>
 					<?php get_search_form(); ?>
 				</div>
