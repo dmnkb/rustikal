@@ -1,7 +1,7 @@
 <?php
 /**
- * Default page template.
- * Used for Pages without a more specific template (e.g., page-{slug}.php).
+ * Front page template.
+ * Used for `/` when a static front page is set in Settings -> Reading.
  */
 
 get_header();
@@ -23,7 +23,7 @@ get_header();
                 'after'  => '</div>',
             )
         );
-        ?>
+        ?>asd
 				</div>
 			</section>
 		</main>

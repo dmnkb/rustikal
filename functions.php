@@ -1,11 +1,8 @@
 <?php
 
 /**
- * Rustikal functions and definitions
- *
- * @link https://developer.wordpress.org/themes/basics/theme-functions/
- *
- * @package Rustikal
+ * Theme setup and hooks.
+ * Loaded automatically; register supports, menus, scripts, and filters here.
  */
 
 if (! defined('_S_VERSION')) {
