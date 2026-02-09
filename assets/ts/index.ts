@@ -16,8 +16,8 @@ const onInit = () => {
     el.dataset.staggered = 'true';
 
     const baseDelay = Number(el.dataset.staggerDelay ?? '0');
-    const perCharDelay = Number(el.dataset.staggerSpeed ?? '40');
-    const duration = Number(el.dataset.staggerDuration ?? '500');
+    const perCharDelay = Number(el.dataset.staggerSpeed ?? '55');
+    const duration = Number(el.dataset.staggerDuration ?? '650');
     const frag = document.createDocumentFragment();
     let index = 0;
 
@@ -89,7 +89,7 @@ const setupFadeIn = () => {
 
   elements.forEach((el) => {
     const delay = Number(el.dataset.fadeDelay ?? '0');
-    const duration = Number(el.dataset.fadeDuration ?? '520');
+    const duration = Number(el.dataset.fadeDuration ?? '720');
 
     el.style.display = 'inline-block';
     el.style.willChange = 'transform, opacity, clip-path';
@@ -110,7 +110,7 @@ const setupFadeIn = () => {
       {
         duration,
         delay,
-        easing: 'cubic-bezier(0.2, 0.65, 0.2, 1)',
+        easing: 'cubic-bezier(0.22, 0.7, 0.2, 1)',
         fill: 'both',
       },
     );
