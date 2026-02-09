@@ -196,9 +196,53 @@ const setupPageTransition = () => {
   });
 };
 
+// MARK: Scroll Easing
+const setupScrollEasing = () => {
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return;
+
+  let currentY = window.scrollY;
+  let targetY = window.scrollY;
+  let isAnimating = false;
+  const maxScroll = () => document.documentElement.scrollHeight - window.innerHeight;
+
+  const step = () => {
+    const diff = targetY - currentY;
+    currentY += diff * 0.045;
+    window.scrollTo(0, currentY);
+
+    if (Math.abs(diff) > 0.5) {
+      requestAnimationFrame(step);
+    } else {
+      window.scrollTo(0, targetY);
+      isAnimating = false;
+    }
+  };
+
+  window.addEventListener(
+    'wheel',
+    (event) => {
+      if (event.ctrlKey) return;
+
+      const delta = event.deltaY * 0.9;
+      if (delta === 0) return;
+
+      event.preventDefault();
+      targetY = Math.min(maxScroll(), Math.max(0, targetY + delta));
+
+      if (!isAnimating) {
+        isAnimating = true;
+        requestAnimationFrame(step);
+      }
+    },
+    { passive: false },
+  );
+};
+
 // MARK: Boot
 document.addEventListener('DOMContentLoaded', (_event) => {
   setupPageTransition();
   setupStagger();
   setupFadeIn();
+  setupScrollEasing();
 });

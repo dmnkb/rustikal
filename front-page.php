@@ -36,6 +36,21 @@ get_header();
                     <?php the_content(); ?>
 				</div>
 			</section>
+			<section id="page-content" class="py-12">
+				<div class="container mx-auto px-6">
+                    <?php the_content(); ?>
+				</div>
+			</section>
+			<section id="page-content" class="py-12">
+				<div class="container mx-auto px-6">
+                    <?php the_content(); ?>
+				</div>
+			</section>
+			<section id="page-content" class="py-12">
+				<div class="container mx-auto px-6">
+                    <?php the_content(); ?>
+				</div>
+			</section>
 		</main>
 		<?php
 
