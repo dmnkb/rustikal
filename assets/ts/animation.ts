@@ -194,27 +194,6 @@ const setupPageTransition = () => {
   });
 };
 
-// MARK: Smooth Scroll
-const setupSmoothScroll = () => {
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReduced) return;
-
-  document.addEventListener('click', (event) => {
-    const target = event.target as Element | null;
-    const link = target?.closest('a') as HTMLAnchorElement | null;
-    if (!link) return;
-    const href = link.getAttribute('href');
-    if (!href || href.indexOf('#') !== 0) return;
-
-    const id = href.slice(1);
-    const el = id ? document.getElementById(id) : null;
-    if (!el) return;
-
-    event.preventDefault();
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-};
-
 // MARK: Scroll Easing
 const setupScrollEasing = () => {
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -262,6 +241,5 @@ export const initAnimations = () => {
   setupPageTransition();
   setupStagger();
   setupFadeIn();
-  setupSmoothScroll();
   setupScrollEasing();
 };
